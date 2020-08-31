@@ -1,0 +1,20 @@
+{
+  "name": "shazam-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:mg2239/shazam-bot.git",
+  "author": "Matthew Guo",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.14",
+    "@types/twit": "^2.2.27",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "axios": "^0.20.0",
+    "discord.js": "^12.3.1",
+    "dotenv": "^8.2.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "twit": "^2.2.11"
+  }
+}
