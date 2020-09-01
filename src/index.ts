@@ -1,10 +1,30 @@
-import dotenv from 'dotenv';
-import discord from 'discord.js';
+/**
+ * Main entrypoint for app.
+ */
 
-const client = new discord.Client();
+import axios from 'axios';
+import fs from 'fs';
+import path from 'path';
+import constants from './constants';
 
-dotenv.config();
+const bytes = fs.readFileSync(path.join(__dirname, 'audio', 'voice.raw'));
 
-client.on('ready', () => console.log(`Logged in as ${client.user!.tag}!`));
+const b64 = bytes.toString('base64');
 
-client.login(process.env.BOT_TOKEN);
+axios({
+  method: 'POST',
+  url: 'https://shazam.p.rapidapi.com/songs/detect',
+  headers: {
+    'content-type': 'text/plain',
+    'x-rapidapi-host': 'shazam.p.rapidapi.com',
+    'x-rapidapi-key': constants.API_KEY,
+    useQueryString: true,
+  },
+  data: b64,
+})
+  .then((response) => {
+    console.log(response.data);
+  })
+  .catch((error) => {
+    console.log(`Error ${error.response.status}: ${error.response.statusText}`);
+  });
